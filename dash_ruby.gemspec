@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name           = 'dash_ruby'
-  spec.version        = '0.1.0'
+  spec.version        = '0.1.1'
   spec.licenses       = ['MIT']
   spec.summary        = 'Hack your Amazon Dash button.'
   spec.description    = 'Hack your Amazon Dash button.'
