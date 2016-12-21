@@ -1,3 +1,4 @@
+require 'pcaprub'
 require_relative './packet.rb'
 
 module Dash
@@ -11,13 +12,13 @@ module Dash
       @last_packet = nil
       @buttons = buttons
     rescue => e
-      raise "Failed to initiate pcap lib. #{e.message}", e.backtrace
+      raise e.class, "Failed to initiate pcap lib. #{e.message}", e.backtrace
     end
 
     def set_filter(type)
       @capture.setfilter(type)
     rescue => e 
-      raise "Failed to set filter. #{e.message}", e.backtrace
+      raise e.class, "Failed to set filter. #{e.message}", e.backtrace
     end
 
     def on_pressed
