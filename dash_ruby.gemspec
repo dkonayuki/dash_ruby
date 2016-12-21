@@ -1,14 +1,15 @@
 Gem::Specification.new do |spec|
-  spec.name          = 'Dash Ruby'
+  spec.name          = 'dash_ruby'
   spec.version       = '0.1.0'
   spec.licenses      = ['MIT']
-  spec.summary       = 'Hack your Amazon dash button.'
-  spec.description   = 'Hack your Amazon dash button.'
+  spec.summary       = 'Hack your Amazon Dash button.'
+  spec.description   = 'Hack your Amazon Dash button.'
   spec.authors       = ['dkonayuki']
   spec.email         = 'contact@dkonayuki.com'
   spec.files         = ['lib/dash_ruby.rb']
   spec.require_paths = ['lib']
   spec.bindir        = 'bin'
+  spec.homepage      = 'https://github.com/dkonayuki/dash_ruby'
 
   spec.executables << 'find_button'
 
