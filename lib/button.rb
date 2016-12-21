@@ -10,7 +10,7 @@ module Dash
       @capture = PCAPRUB::Pcap.open_live(interface, SNAPLENGTH, true, 0)
       set_filter('arp')
       @last_packet = nil
-      @buttons = buttons
+      @buttons = buttons.flatten
     rescue => e
       raise e.class, "Failed to initiate pcap lib. #{e.message}", e.backtrace
     end
@@ -24,8 +24,9 @@ module Dash
     def on_pressed
       @capture.each_packet do |raw_packet|
         packet = Packet.new(raw_packet)
-        if !duplicate? && @buttons.include?(packet.sha)
-          @last_packet = Time.now
+        if !duplicate?(packet) && @buttons.include?(packet.sha)
+          @last_packet = packet.time
+          @last_sha = packet.sha
           yield packet if block_given?
         end
       end
@@ -33,8 +34,8 @@ module Dash
       puts "\nAborting..."
     end
 
-    def duplicate?
-      @last_packet && (Time.now - @last_packet) < 1
+    def duplicate?(packet)
+      @last_packet && (packet.time - @last_packet).abs < 1 && @last_sha && (packet.sha == @last_sha)
     end
 
   end
