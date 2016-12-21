@@ -11,6 +11,6 @@ capture = PCAPRUB::Pcap.open_live(interface, 65535, true, 0)
 capture.setfilter('arp')
 puts "Please press your Dash button."
 capture.each_packet do |raw_packet|
-  packet = Packet.new(raw_packet)
+  packet = Dash::Packet.new(raw_packet)
   puts "ARP packet detected. Potential dash button MAC address: #{packet.sha}. #{Dash::Amazon::NAME}." if packet.oper == 1 && Dash::Amazon::MAC_ADDRESS.include?(packet.sha.split(':').slice(0,3).join.upcase) 
 end
